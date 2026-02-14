@@ -1,8 +1,17 @@
 @import "tailwindcss";
 
 :root {
+  /* Mode clair - Couleurs de base */
   --background: #ffffff;
   --foreground: #171717;
+  --card-bg: #ffffff;
+  --card-border: #e5e7eb;
+  --text-primary: #111827;
+  --text-secondary: #6b7280;
+  --text-muted: #9ca3af;
+  --border-color: #e5e7eb;
+  --hover-bg: #f9fafb;
+  --shadow: rgba(0, 0, 0, 0.1);
 }
 
 @theme inline {
@@ -12,15 +21,387 @@
   --font-mono: var(--font-geist-mono);
 }
 
+/* Mode sombre - Couleurs professionnelles */
+.dark {
+  --background: #0f172a;
+  --foreground: #f1f5f9;
+  --card-bg: #1e293b;
+  --card-border: #334155;
+  --text-primary: #f1f5f9;
+  --text-secondary: #cbd5e1;
+  --text-muted: #94a3b8;
+  --border-color: #334155;
+  --hover-bg: #1e293b;
+  --shadow: rgba(0, 0, 0, 0.3);
+}
+
 @media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+  :root:not(.light) {
+    --background: #0f172a;
+    --foreground: #f1f5f9;
+    --card-bg: #1e293b;
+    --card-border: #334155;
+    --text-primary: #f1f5f9;
+    --text-secondary: #cbd5e1;
+    --text-muted: #94a3b8;
+    --border-color: #334155;
+    --hover-bg: #1e293b;
+    --shadow: rgba(0, 0, 0, 0.3);
   }
+}
+
+/* Application globale des couleurs */
+* {
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}
+
+html {
+  background-color: var(--background);
+  color: var(--foreground);
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  min-height: 100vh;
+}
+
+/* Classes utilitaires pour le dark mode */
+.bg-card {
+  background-color: var(--card-bg);
+}
+
+.border-card {
+  border-color: var(--card-border);
+}
+
+.text-primary {
+  color: var(--text-primary);
+}
+
+.text-secondary {
+  color: var(--text-secondary);
+}
+
+.text-muted {
+  color: var(--text-muted);
+}
+
+.hover-bg {
+  background-color: var(--hover-bg);
+}
+
+/* ============================================
+   ANIMATIONS SVG POUR LA PAGE DE CONNEXION
+   ============================================ */
+
+/* Animation de défilement de gauche à droite */
+@keyframes slide-right {
+  0% {
+    transform: translateX(-200px) translateY(0);
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(calc(100vw + 200px)) translateY(50px);
+    opacity: 0;
+  }
+}
+
+.svg-slide-right {
+  animation: slide-right 20s linear infinite;
+}
+
+/* Animation de défilement de haut en bas */
+@keyframes slide-down {
+  0% {
+    transform: translateY(-200px) translateX(0);
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(calc(100vh + 200px)) translateX(30px);
+    opacity: 0;
+  }
+}
+
+.svg-slide-down {
+  animation: slide-down 18s linear infinite;
+}
+
+/* Animation de défilement de droite à gauche */
+@keyframes slide-left {
+  0% {
+    transform: translateX(200px) translateY(0);
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(calc(-100vw - 200px)) translateY(-50px);
+    opacity: 0;
+  }
+}
+
+.svg-slide-left {
+  animation: slide-left 22s linear infinite;
+}
+
+/* Animation de défilement de bas en haut */
+@keyframes slide-up {
+  0% {
+    transform: translateY(200px) translateX(0);
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(calc(-100vh - 200px)) translateX(-30px);
+    opacity: 0;
+  }
+}
+
+.svg-slide-up {
+  animation: slide-up 16s linear infinite;
+}
+
+/* Animation de défilement diagonal */
+@keyframes slide-diagonal {
+  0% {
+    transform: translateX(-150px) translateY(-150px);
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(calc(100vw + 150px)) translateY(calc(100vh + 150px));
+    opacity: 0;
+  }
+}
+
+.svg-slide-diagonal {
+  animation: slide-diagonal 25s linear infinite;
+}
+
+/* Animation de rotation continue */
+@keyframes rotate {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.svg-rotate {
+  animation: rotate 15s linear infinite;
+}
+
+/* ============================================
+   ANIMATIONS POUR LES ICÔNES ET ÉLÉMENTS 3D
+   ============================================ */
+
+/* Animation de flottement pour l'icône */
+@keyframes icon-float {
+  0%, 100% {
+    transform: translateY(0) scale(1);
+  }
+  50% {
+    transform: translateY(-15px) scale(1.02);
+  }
+}
+
+.icon-float {
+  animation: icon-float 4s ease-in-out infinite;
+}
+
+/* Animation au survol de l'icône */
+@keyframes icon-hover {
+  0% {
+    transform: translateY(0) scale(1) rotateY(0deg);
+  }
+  50% {
+    transform: translateY(-10px) scale(1.05) rotateY(5deg);
+  }
+  100% {
+    transform: translateY(0) scale(1) rotateY(0deg);
+  }
+}
+
+.icon-hover {
+  animation: icon-hover 2s ease-in-out infinite;
+}
+
+/* Animation de pulsation lente */
+@keyframes icon-pulse-slow {
+  0%, 100% {
+    opacity: 0.3;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.5;
+    transform: scale(1.1);
+  }
+}
+
+.icon-pulse-slow {
+  animation: icon-pulse-slow 3s ease-in-out infinite;
+}
+
+/* Animation de brillance (shimmer) */
+@keyframes icon-shimmer {
+  0% {
+    background-position: -200% center;
+  }
+  100% {
+    background-position: 200% center;
+  }
+}
+
+.icon-shimmer {
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.4),
+    transparent
+  );
+  background-size: 200% 100%;
+  animation: icon-shimmer 3s ease-in-out infinite;
+}
+
+/* Animation de rotation lente */
+@keyframes icon-spin-slow {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.icon-spin-slow {
+  animation: icon-spin-slow 8s linear infinite;
+}
+
+/* Animation de rotation très lente */
+@keyframes icon-spin-slower {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(-360deg);
+  }
+}
+
+.icon-spin-slower {
+  animation: icon-spin-slower 12s linear infinite;
+}
+
+/* ============================================
+   ANIMATIONS POUR LE TEXTE
+   ============================================ */
+
+/* Animation de dégradé de texte */
+@keyframes text-gradient-animate {
+  0%, 100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+.text-gradient-animate {
+  background-size: 200% 200%;
+  animation: text-gradient-animate 3s ease infinite;
+}
+
+/* Animation de slide-up avec fade */
+@keyframes slide-up-fade {
+  0% {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.text-slide-up-fade {
+  animation: slide-up-fade 1s ease-out;
+}
+
+/* Animation de fade-in-up */
+@keyframes fade-in-up {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in-up {
+  animation: fade-in-up 0.8s ease-out;
+}
+
+/* ============================================
+   UTILITAIRES POUR LES EFFETS 3D
+   ============================================ */
+
+.perspective-1000 {
+  perspective: 1000px;
+}
+
+.translate-z-12 {
+  transform: translateZ(12px);
+}
+
+@keyframes gradient-xy {
+  0%, 100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+.animate-gradient-xy {
+  background-size: 200% 200%;
+  animation: gradient-xy 3s ease infinite;
+}
+.delay-500 {
+  animation-delay: 500ms;
+}
+.delay-700 {
+  animation-delay: 700ms;
+}
+.delay-1000 {
+  animation-delay: 1000ms;
 }
